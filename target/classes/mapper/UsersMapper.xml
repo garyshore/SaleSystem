@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shore.distribution.dao.UsersMapper">
+    <resultMap type="com.shore.distribution.entity.Users" id="result">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPwd" column="user_pwd"/>
+        <result property="userBalance" column="user_balance"/>
+        <result property="fissionPathway" column="fission_pathway"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <select id="getUserInfo" parameterType="com.shore.distribution.entity.Users" resultMap="result">
+        select * from users
+        <where>
+            <if test="users.id != null and users.id != ''">and id = #{users.id}</if>
+            <if test="users.userName != null and users.userName != ''">and user_name = #{users.userName}</if>
+            <if test="users.userPwd != null and users.userPwd != ''">and user_pwd = #{users.userPwd}</if>
+            <if test="users.userBalance != null and users.userBalance != ''">and user_balance = #{users.userBalance}</if>
+            <if test="users.fissionPathway != null and users.fissionPathway != ''">and fission_pathway = #{users.fissionPathway}</if>
+        </where>
+    </select>
+    <insert id="insertUser" parameterType="com.shore.distribution.entity.Users">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="users.userName != null">user_name,</if>
+            <if test="users.userPwd != null">user_pwd,</if>
+            <if test="users.userBalance != null">user_balance,</if>
+            <if test="users.fissionPathway != null">fission_pathway,</if>
+            <if test="users.delFlag != null">del_flag,</if>
+            <if test="users.createBy != null">create_by,</if>
+            <if test="users.createTime != null">create_time,</if>
+            <if test="users.updateBy != null">update_by,</if>
+            <if test="users.updateTime != null">update_time,</if>
+            <if test="users.remark != null">remark</if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="users.userName != null">#{users.userName},</if>
+            <if test="users.userPwd != null">#{users.userPwd},</if>
+            <if test="users.userBalance != null">#{users.userBalance},</if>
+            <if test="users.fissionPathway != null">#{users.fissionPathway},</if>
+            <if test="users.delFlag != null">#{users.delFlag},</if>
+            <if test="users.createBy != null">#{users.createBy},</if>
+            <if test="users.createTime != null">#{users.createTime},</if>
+            <if test="users.updateBy != null">#{users.updateBy},</if>
+            <if test="users.updateTime != null">#{users.updateTime},</if>
+            <if test="users.remark != null">#{users.remark}</if>
+        </trim>
+    </insert>
+    <update id="updateUserById" parameterType="com.shore.distribution.entity.Users">
+        update users
+        <set>
+            <if test="users.userName != null and users.userName != ''">user_name = #{users.userName},</if>
+            <if test="users.userPwd != null and users.userPwd != ''">user_pwd = #{users.userPwd},</if>
+            <if test="users.userBalance != null and users.userBalance != ''">user_balance = #{users.userBalance},</if>
+            <if test="users.fissionPathway != null and users.fissionPathway != ''">fission_pathway = #{users.fissionPathway},</if>
+        </set>
+        where id = #{users.id}
+    </update>
+
+</mapper>

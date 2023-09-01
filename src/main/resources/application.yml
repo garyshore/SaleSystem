@@ -1,0 +1,18 @@
+server:
+  port: 8887
+system:
+  type: 1   # 根据程序运行系统改变本值； 1： windows  2: linux
+spring:
+  application:
+    name: user-service    # 项目名称尽量用小写
+  datasource:
+    base:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      jdbcUrl: jdbc:mysql://localhost:3306/salesystem?serverTimezone=GMT%2B8&useSSL=true
+      username: root
+      password: 123456
+
+      removeAbandoned: true
+      removeAbandonedTimeout: 60
+      logAbandoned: true
